@@ -25,6 +25,14 @@ function AppContent() {
     setActiveTab('dashboard');
   };
 
+  // Handle tab change - close training if active
+  const handleTabChange = (tab: string) => {
+    if (trainingMode.active) {
+      setTrainingMode({ active: false });
+    }
+    setActiveTab(tab);
+  };
+
   const renderContent = () => {
     if (trainingMode.active) {
       return (
@@ -60,7 +68,7 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
+      <Navigation activeTab={activeTab} onTabChange={handleTabChange} />
       <main className="md:ml-20 pb-24 md:pb-8 p-4 md:p-8">
         <div className="max-w-4xl mx-auto">
           {renderContent()}
